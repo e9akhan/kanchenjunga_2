@@ -1,0 +1,17 @@
+{% extends 'core/base2.html' %}
+
+{% block app_content %}
+
+<h3 class="my-3 px-4">{{header}}</h3>
+
+<div class="container-fluid">
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <h5>{{headline}}</h5>
+        {{form.as_p}}
+        <button type="submit" class="btn btn-outline-success">Submit</button>
+    </form>
+</div>
+
+{% endblock %}

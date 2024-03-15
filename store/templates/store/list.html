@@ -1,0 +1,62 @@
+{% extends 'core/base2.html' %}
+
+{% block app_content %}
+
+<div class="container-fluid px-4" style="height: 100%;">
+    <div class="container-fluid my-3 p-0">
+        <form action="{% if equipments_list %}{% url 'store:equipments' equipment_type=equipment_type %}{% else %}{}{% endif %}">
+            <input type="text" placeholder="Search" class="form-control" name="search" type="submit">
+        </form>
+    </div>
+    
+    <div class="container-fluid shadow" style="height: 90%;">
+        <div class="container-fluid p-0 d-flex justify-content-between align-items-center" style="height: 7%;">
+            <div></div>
+            <strong>{{total}} Records</strong>
+            <div class="btn-group">
+                <button type="button" class="btn btn-outline-dark btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  Filter
+                </button>
+                <ul class="dropdown-menu">
+                  {% if equipments_list == True %}
+                  <li><a class="dropdown-item" href="{% url 'store:equipments' equipment_type=equipment_type %}">All</a></li>
+                  <li><a class="dropdown-item" href="{% url 'store:equipments' equipment_type=equipment_type %}?under_repair=True">Under Repair</a></li>
+                  {% else %}
+                    {% for eqp in equipment_types %}
+                        {% if forloop.counter == 1 %}
+                        <li><a class="dropdown-item" href="{% url 'store:allocations' %}">{{eqp.1}}</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item" href="{% url 'store:allocations' %}?equipment_type={{eqp.0}}">{{eqp.1}}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                </ul>
+              </div>
+        </div>
+    
+        <hr class="m-0">
+    
+        <div class="container-fluid p-0 overflow-auto" style="height: 86%;">
+            <table class="table table-striped table-hover">
+                {% for obj in object_list %}
+                    <tr>
+                        {% if equipments_list == True %}
+                            <td>
+                                <a href="{% url 'store:detail-equipment' slug=obj.slug %}" class="link-dark m-0 p-0">
+                                    {{obj.label}}
+                                </a>
+                            </td>
+                            <td>{{obj.serial_number}}</td>
+                            <td>{{obj.model_number}}</td>
+                        {% else %}
+                            <td>{{obj.user}}</td>
+                            <td>{{obj.equipment}}</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

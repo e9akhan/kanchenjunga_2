@@ -1,0 +1,63 @@
+{% extends 'core/base2.html' %}
+
+{% block app_content %}
+
+<h3 class="my-3 px-4">{{object.label}}</h3>
+
+<div class="container-fluid px-4 text-end">
+    <a href="{% url 'store:update-equipment' slug=object.slug %}" class="btn btn-outline-success btn-sm">Edit</a>
+    <a href="{% url 'store:delete-equipment' slug=object.slug %}" class="btn btn-outline-danger btn-sm">Delete</a>
+</div>
+
+<div class="container-fluid d-md-flex justify-content-center">
+    <div class="container-fluid p-0 detail-table">
+        <table class="table">
+            <tr>
+                <th>Serial Number</th>
+                <td>{{object.serial_number}}</td>
+            </tr>
+
+            <tr>
+                <th>Model Number</th>
+                <td>{{object.model_number}}</td>
+            </tr>
+
+            <tr>
+                <th>Buy Date</th>
+                <td>{{object.buy_date}}</td>
+            </tr>
+
+            <tr>
+                <th>Equipment Type</th>
+                <td>{{object.equipment_type}}</td>
+            </tr>
+
+            <tr>
+                <th>Current User</th>
+                <td>{{object.get_current_user}}</td>
+            </tr>
+
+            <tr>
+                <th>Functional</th>
+                <td>{{object.functional}}</td>
+            </tr>
+
+            <tr>
+                <th>Under Repair</th>
+                <td>{{object.under_repair}}</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="w-50 container-fluid">
+        <h4>All Users</h4>
+        {% for user in obj.get_all_users %}
+            <table class="table">
+                <tr>{{user}}</tr>
+            </table>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="row" style="height: 95%;">
+    <div class="col-lg-2 p-0 desktop-mode" style="height: 100%;">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="height: 100%;">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+              <span class="fs-4">Inventory Store</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
+              <li class="nav-item">
+                <a href="{% url 'store:dashboard' %}" class="nav-link link-dark" aria-current="page">
+                  Dashboard
+                </a>
+              </li>
+              <hr>
+              <li>
+                <a href="{% url 'store:add-equipment-type' %}" class="btn btn-dark mb-2 w-100">
+                  Add Equipment Type
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'store:add-equipment' %}" class="btn btn-dark mb-2 w-100">
+                  Add Equipment
+                </a>
+              </li>
+              <hr>
+              <li class="mb-1">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#allocation-collapse" aria-expanded="false">
+                  Allocations
+                </button>
+                <div class="collapse" id="allocation-collapse">
+                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><a href="{% url 'store:allocations' %}" class="link-dark nav-link p-0 my-2">List Allocations</a></li>
+                    <li><a href="#" class="btn btn-dark w-100">Allocate</a></li>
+                  </ul>
+                </div>
+              </li>
+              <hr>
+              <li>
+                <a href="#" class="nav-link link-dark">
+                  Users
+                </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link link-dark">
+                  Requests
+                </a>
+              </li>
+            </ul>
+            <hr>
+            <div class="dropdown">
+              <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>mdo</strong>
+              </a>
+              <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+                <li><a class="dropdown-item" href="{% url 'accounts:edit-profile' pk=request.user.pk %}">Edit Profile</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+    </div>
+
+    <div class="col-lg-10 py-3 overflow-auto" style="height: 100%;">
+      {% block app_content %}{% endblock %}
+    </div>
+</div>
+
+{% endblock %}

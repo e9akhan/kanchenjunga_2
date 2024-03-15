@@ -1,0 +1,26 @@
+.mobile-mode{
+    display: none;
+}
+
+.detail-table{
+    width: 50%;
+}
+
+@media screen and (max-width:991px){
+    .desktop-mode{
+        display: none;
+    }
+
+    .mobile-mode{
+        display: block;
+    }
+
+    .card-center{
+        display: flex;
+        justify-content: center;
+    }
+
+    .detail-table{
+        width: 100%;
+    }
+}

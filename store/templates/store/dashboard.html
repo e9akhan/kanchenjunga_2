@@ -1,0 +1,26 @@
+{% extends 'core/base2.html' %}
+
+{% block app_content %}
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 px-2 card-center">
+    {% for equipment_type in equipment_types %}
+    {% with variable=equipment_type.get_remaining_equipments %}
+    <div class="card shadow m-2 {% if variable < equipment_type.threshold %}bg-danger bg-gradient{% endif %}" style="width: 18rem; height: 12rem;">
+      <a href="{% url 'store:equipments' equipment_type=equipment_type.slug %}" class="nav-link link-dark" style="height: 100%;">
+        <div class="card-body" style="height: 100%;">
+          <h5 class="card-title text-center">{{equipment_type}}</h5>
+          <hr class="m-0 p-0">
+          <div class="d-flex align-items-center justify-content-center" style="height: 65%; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+          <div class="container-fluid text-center">
+            <strong style="font-size: 2rem;">{{variable}}</strong><br>
+            <span style="font-size: 0.9rem;">Available</span>
+          </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endwith %}
+  {% endfor %}
+</div>
+
+{% endblock %}

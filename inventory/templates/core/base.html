@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/styles.css">
+
+    <title>{{title}}</title>
+  </head>
+  <body class="h-100">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <div class="mobile-mode">
+              {% if request.user.is_authenticated %}
+            <li class="nav-item">
+              <a href="{% url 'store:dashboard' %}" class="nav-link link-dark" aria-current="page">
+                Dashboard
+              </a>
+            </li>
+            <hr>
+            <li>
+              <a href="{% url 'store:add-equipment-type' %}" class="btn btn-dark mb-2 w-100">
+                Add Equipment Type
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'store:add-equipment' %}" class="btn btn-dark mb-2 w-100">
+                Add Equipment
+              </a>
+            </li>
+            <hr>
+            <li class="mb-1">
+              <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#allocation-collapse" aria-expanded="false">
+                Allocations
+              </button>
+              <div class="collapse" id="allocation-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li><a href="{% url 'store:allocations' %}" class="link-dark nav-link p-0 my-2">List Allocations</a></li>
+                  <li><a href="#" class="btn btn-dark w-100">Allocate</a></li>
+                </ul>
+              </div>
+            </li>
+            <hr>
+            <li>
+              <a href="#" class="nav-link link-dark">
+                Users
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link link-dark">
+                Requests
+              </a>
+            </li>
+            {% endif %}
+            </div>
+          </ul>
+
+          <ul class="navbar-nav">
+          {% if not request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:sign-up' %}">Sign Up</a>
+          </li>
+          {% else %}
+          <div class="mobile-mode">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+            </li>
+          </div>
+          {% endif %}
+        </ul>
+        </div>
+      </div>
+    </nav>
+    {% block content %}{% endblock %}
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
